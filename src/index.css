@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 142 71% 45%;
+    --primary-foreground: 240 10% 4%;
+
+    --secondary: 240 10% 14%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 10% 14%;
+    --muted-foreground: 240 5% 60%;
+
+    --accent: 187 100% 50%;
+    --accent-foreground: 240 10% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 10% 18%;
+    --input: 240 10% 18%;
+    --ring: 142 71% 45%;
+
+    --radius: 0.75rem;
+
+    /* Custom fitness tokens */
+    --neon-glow: 142 71% 45%;
+    --cyan-glow: 187 100% 50%;
+    --energy-orange: 25 95% 53%;
+    --warning-yellow: 45 93% 47%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 71% 45%), hsl(187 100% 50%));
+    --gradient-dark: linear-gradient(180deg, hsl(240 10% 8%), hsl(240 10% 4%));
+    --gradient-glow: radial-gradient(circle at center, hsl(142 71% 45% / 0.15), transparent 70%);
+    
+    /* Shadows */
+    --shadow-neon: 0 0 20px hsl(142 71% 45% / 0.4);
+    --shadow-cyan: 0 0 20px hsl(187 100% 50% / 0.4);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.3);
+    
+    /* Glass effect */
+    --glass-bg: hsl(240 10% 8% / 0.7);
+    --glass-border: hsl(0 0% 100% / 0.1);
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)];
+  }
+  
+  .neon-text {
+    text-shadow: 0 0 10px hsl(var(--neon-glow) / 0.8),
+                 0 0 20px hsl(var(--neon-glow) / 0.6),
+                 0 0 40px hsl(var(--neon-glow) / 0.4);
+  }
+  
+  .neon-border {
+    box-shadow: 0 0 10px hsl(var(--neon-glow) / 0.5),
+                inset 0 0 10px hsl(var(--neon-glow) / 0.1);
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+  
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--neon-glow) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--neon-glow) / 0.7);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes countUp {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    color: hsl(var(--primary));
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-count {
+  animation: countUp 0.3s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
